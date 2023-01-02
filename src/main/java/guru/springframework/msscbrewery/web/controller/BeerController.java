@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity createNewBear(BeerDto beer) {
+    public ResponseEntity createNewBear(@RequestBody BeerDto beer) {
         BeerDto savedBeer = beerService.saveNewBeer(beer);
 
         HttpHeaders headers = new HttpHeaders();
@@ -45,12 +46,11 @@ public class BeerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity updateBeer(@PathVariable("beerId") UUID beerId, BeerDto beer) {
+    public ResponseEntity updateBeer(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beer) {
         // I think GraphQL would return the entire updated object
         beerService.updateBeer(beerId, beer);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-        );
     }
 
 }
