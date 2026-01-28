@@ -1,6 +1,6 @@
-package guru.springframework.msscbrewery.services;
+package org.fotm.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.BeerDto;
+import org.fotm.msscbrewery.web.model.BeerDto;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,15 @@ public class BeerServiceImpl implements BeerService {
         .beerName("Schell's")
         .beerStyle("Dark Ale")
         .upc("088067055287")
+        .build();
+  }
+
+  @Override
+  public BeerDto saveNewBeer(BeerDto beer) {
+    return BeerDto.builder().id(UUID.randomUUID())
+        . beerName("Excelsior Bayside Brown Ale")
+        .beerStyle("Brown Ale")
+        .upc("088001242026")
         .build();
   }
 }

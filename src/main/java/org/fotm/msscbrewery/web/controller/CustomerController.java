@@ -1,9 +1,10 @@
-package guru.springframework.msscbrewery.web.controller;
+package org.fotm.msscbrewery.web.controller;
 
-import guru.springframework.msscbrewery.web.model.CustomerDto;
+import org.fotm.msscbrewery.web.model.CustomerDto;
 import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class CustomerController {
   }
 
   @GetMapping("/{customerId}")
-  public ResponseEntity<CustomerDto> getCustomerById(UUID customerId) {
+  public ResponseEntity<CustomerDto> getCustomerById(@PathVariable UUID customerId) {
     return ResponseEntity.ok(customerService.getCustomerById(customerId));
   }
 

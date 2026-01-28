@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery.web.model;
+package org.fotm.msscbrewery.web.model;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

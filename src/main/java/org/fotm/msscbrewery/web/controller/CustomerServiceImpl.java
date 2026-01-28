@@ -1,6 +1,6 @@
-package guru.springframework.msscbrewery.web.controller;
+package org.fotm.msscbrewery.web.controller;
 
-import guru.springframework.msscbrewery.web.model.CustomerDto;
+import org.fotm.msscbrewery.web.model.CustomerDto;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 

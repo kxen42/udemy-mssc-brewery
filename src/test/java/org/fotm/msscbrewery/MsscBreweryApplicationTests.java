@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery;
+package org.fotm.msscbrewery;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

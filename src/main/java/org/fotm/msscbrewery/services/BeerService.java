@@ -1,6 +1,6 @@
-package guru.springframework.msscbrewery.services;
+package org.fotm.msscbrewery.services;
 
-import guru.springframework.msscbrewery.web.model.BeerDto;
+import org.fotm.msscbrewery.web.model.BeerDto;
 
 import java.util.UUID;
 
@@ -9,4 +9,6 @@ import java.util.UUID;
  */
 public interface BeerService {
     BeerDto getBeerById(UUID beerId);
+
+  BeerDto saveNewBeer(BeerDto beer);
 }

@@ -1,4 +1,4 @@
-package guru.springframework.msscbrewery;
+package org.fotm.msscbrewery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MsscBreweryApplication {
 
-	public static void main(String[] args) {
+	 static void main(String[] args) {
 		SpringApplication.run(MsscBreweryApplication.class, args);
 	}
 
