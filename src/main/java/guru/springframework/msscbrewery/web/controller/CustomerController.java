@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/api/v1/customer")
+@RequestMapping(value="/api/{version}/customer", version = "v1")
 @RestController
 public class CustomerController {
 

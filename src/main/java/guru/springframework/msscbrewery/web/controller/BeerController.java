@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RequestMapping("/api/v1/beer")
+@RequestMapping(value = "/api/{version}/beer", version = "v1")
 @RestController // Extends @Controller + @ResponseBody
 public class BeerController {
 
