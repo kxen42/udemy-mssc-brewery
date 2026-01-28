@@ -25,4 +25,13 @@ public class BeerController {
     return ResponseEntity.ok(beerService.getBeerById(beerId));
   }
 
+  @GetMapping(value = "/{beerId}", version = "v2")
+  public ResponseEntity<BeerDto> getBeerById2(UUID beerId) {
+    return ResponseEntity.ok(BeerDto.builder().id(beerId)
+        .beerName("Black Label")
+        .beerStyle("Lager")
+        .upc("072720014346")
+        .build());
+  }
+
 }
