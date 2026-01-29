@@ -1,4 +1,4 @@
-package org.fotm.msscbrewery.web.controller;
+package org.fotm.msscbrewery.services;
 
 import org.fotm.msscbrewery.web.model.CustomerDto;
 import java.util.UUID;

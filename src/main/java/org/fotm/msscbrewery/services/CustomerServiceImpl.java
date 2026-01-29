@@ -1,4 +1,4 @@
-package org.fotm.msscbrewery.web.controller;
+package org.fotm.msscbrewery.services;
 
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;

@@ -3,6 +3,7 @@ package org.fotm.msscbrewery.services;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.fotm.msscbrewery.web.model.BeerDto;
+import org.fotm.msscbrewery.web.model.v2.BeerDtoV2;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,9 +27,9 @@ public class BeerServiceImpl implements BeerService {
   public BeerDto saveNewBeer(BeerDto beer) {
     log.info("Saving new beer: {}", beer);
     return BeerDto.builder().id(UUID.randomUUID())
-        .beerName("Excelsior Bayside Brown Ale")
-        .beerStyle("Brown Ale")
-        .upc("088001242026")
+        .beerName(beer.getBeerName())
+        .beerStyle(beer.getBeerStyle())
+        .upc(beer.getUpc())
         .build();
   }
 
@@ -43,6 +44,15 @@ public class BeerServiceImpl implements BeerService {
   public void deleteBeerById(UUID beerId) {
     log.info("Deleting beer by id: {}", beerId);
     // TODO use repo to delete beer by Id; not an error if beer doesn't exist'
+  }
+
+  @Override
+  public BeerDtoV2 saveNewBeer(BeerDtoV2 beer) {
+    log.info("Saving new beer: {}", beer);
+    // TODO need a JPA repo that can handle this or map this DTO to the old DTO
+
+    beer.setId(UUID.randomUUID());
+    return beer;
   }
 
 

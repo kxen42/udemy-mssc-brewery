@@ -2,8 +2,11 @@ package org.fotm.msscbrewery.web.controller;
 
 import java.net.URI;
 import java.util.UUID;
+import lombok.extern.slf4j.Slf4j;
 import org.fotm.msscbrewery.services.BeerService;
 import org.fotm.msscbrewery.web.model.BeerDto;
+import org.fotm.msscbrewery.web.model.v2.BeerDtoV2;
+import org.fotm.msscbrewery.web.model.v2.BeerStyleEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Slf4j
 @RequestMapping(value = "/api/{version}/beer")
 @RestController // Extends @Controller + @ResponseBody
 public class BeerController {
@@ -38,11 +42,11 @@ public class BeerController {
     return ResponseEntity.ok(beerService.getBeerById(beerId));
   }
 
-  @GetMapping(value = "/v2/{beerId}")
-  public ResponseEntity<BeerDto> getBeerById2(@PathVariable UUID beerId) {
-    return ResponseEntity.ok(BeerDto.builder().id(beerId)
+  @GetMapping(value = "/{beerId}", version = "v2")
+  public ResponseEntity<BeerDtoV2> getBeerById2(@PathVariable UUID beerId) {
+    return ResponseEntity.ok(BeerDtoV2.builder().id(beerId)
         .beerName("Black Label")
-        .beerStyle("Lager")
+        .beerStyle(BeerStyleEnum.LAGER)
         .upc("072720014346")
         .build());
   }
@@ -51,6 +55,18 @@ public class BeerController {
   public ResponseEntity<BeerDto> saveNewBeer(@RequestBody BeerDto beer,
       @PathVariable String version) {
     BeerDto savedBeerDto = beerService.saveNewBeer(beer);
+    var strUri = "http://%s:%s/api/%s/beer/%s".formatted(serverAddress, serverPort, version,
+        savedBeerDto.getId());
+    return ResponseEntity
+        .created(URI.create(strUri))
+        .body(savedBeerDto);
+  }
+
+  @PostMapping(version = "v2")
+  public ResponseEntity<BeerDtoV2> saveNewBeer(@RequestBody BeerDtoV2 beer,
+      @PathVariable String version) {
+    log.info("TODO ObjectMapper so input can use 'Black Lager' rather than 'BLACK_LAGER' " + BeerStyleEnum.fromStyle("Black Lager"));
+    BeerDtoV2 savedBeerDto = beerService.saveNewBeer(beer);
     var strUri = "http://%s:%s/api/%s/beer/%s".formatted(serverAddress, serverPort, version,
         savedBeerDto.getId());
     return ResponseEntity

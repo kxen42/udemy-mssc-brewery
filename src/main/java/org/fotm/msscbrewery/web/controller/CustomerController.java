@@ -2,6 +2,7 @@ package org.fotm.msscbrewery.web.controller;
 
 import java.net.URI;
 import java.util.UUID;
+import org.fotm.msscbrewery.services.CustomerService;
 import org.fotm.msscbrewery.web.model.CustomerDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
