@@ -11,16 +11,11 @@
   </parent>
 
   <groupId>org.fotm</groupId>
-  <artifactId>udemy-mssc-brewery</artifactId>
+  <artifactId>mssc-beer-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>udemy-mssc-brewery</name>
-  <description>udemy-mssc-brewery</description>
+  <name>mssc-beer-service</name>
+  <description>mssc-beer-service microservice</description>
 
-  <modules>
-    <module>basic-examples</module>
-    <module>mssc-beer-service</module>
-  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
