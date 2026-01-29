@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
-@RequestMapping(value = "/api/{version}")
+@RequestMapping(value = "/web/{version}")
 @Controller
 public class IndexController {
 
