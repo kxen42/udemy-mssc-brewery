@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: mssc-beer-service
+
+  main:
+    banner-mode: off
+
+  profiles:
+    active: dev
+
+server:
+  port: 8081
