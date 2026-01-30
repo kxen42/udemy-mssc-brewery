@@ -5,6 +5,9 @@ spring:
   main:
     banner-mode: off
 
+  profiles:
+    active: dev
+
 server:
-  port: 8081
-  address: localhost
+  port: 9090
+  address: somedomain.org.ca
