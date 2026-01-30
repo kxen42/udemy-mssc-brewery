@@ -1,6 +1,5 @@
-package org.fotm.msscbeerservice.web;
+package org.fotm.msscbeerservice.web.model;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -12,16 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerDto implements BaseItem {
+public class CustomerDto implements BaseItem {
 
   private UUID id;
   private Long version;
   private OffsetDateTime createdDate;
   private OffsetDateTime lastModifiedDate;
-  private String beerName;
-  private BeerStyleEnum beerStyle;
-  private String upc;
-  private BigDecimal price;
-  private Integer quantityOnHand;
-
+  private String customerName;
 }

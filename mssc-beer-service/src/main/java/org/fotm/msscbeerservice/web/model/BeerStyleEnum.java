@@ -1,4 +1,4 @@
-package org.fotm.msscbeerservice.web;
+package org.fotm.msscbeerservice.web.model;
 
 import lombok.Getter;
 
