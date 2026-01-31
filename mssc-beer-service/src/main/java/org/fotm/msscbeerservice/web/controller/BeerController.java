@@ -40,7 +40,7 @@ public class BeerController {
 
   @PostMapping
   public ResponseEntity<Void> saveNewBeer(@RequestBody BeerDto beerDto,
-      @PathVariable Long version) {
+      @PathVariable String version) {
     log.info("Saving new beer: {}, API version: {}", beerDto, version);
 //    BeerDto savedBeerDto = beerService.saveNewBeer(beer);
     var savedBeerDto = BeerDto.builder().id(UUID.randomUUID()).beerName(beerDto.getBeerName())
@@ -55,7 +55,7 @@ public class BeerController {
 
   @PutMapping("/{beerId}")
   public ResponseEntity<Void> updateBeer(@PathVariable UUID beerId, @RequestBody BeerDto beerDto,
-      @PathVariable Long version) {
+      @PathVariable String version) {
     log.info("Updating beer: {}, content: {}, API version: {}", beerId, beerDto, version);
     return ResponseEntity.noContent().build();
   }
