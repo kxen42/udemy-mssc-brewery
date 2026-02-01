@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.fotm.msscbeerclient.web.model.BeerDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,7 @@ class BeerClientUsingRestTemplateIntegrationTest {
   void deleteBeer() {
 
     // the backend is stubbed out so there is not much else to test here; at least we didn't get 4xx or 5xx
-    beerClient.deleteBeer(UUID.randomUUID());
+    Assertions.assertThatCode(
+        () -> beerClient.deleteBeer(UUID.randomUUID())).doesNotThrowAnyException();
   }
 }
