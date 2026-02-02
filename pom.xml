@@ -20,6 +20,7 @@
   <modules>
     <module>basic-examples</module>
     <module>mssc-beer-service</module>
+    <module>mssc-beer-client</module>
   </modules>
 
   <properties>

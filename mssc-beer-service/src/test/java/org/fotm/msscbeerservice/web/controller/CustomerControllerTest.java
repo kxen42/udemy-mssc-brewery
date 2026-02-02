@@ -6,10 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
-import org.fotm.msscbeerservice.web.model.BeerDto;
-import org.fotm.msscbeerservice.web.model.BeerStyleEnum;
+import org.fotm.msscbeerservice.web.model.CustomerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class BeerControllerTest {
+class CustomerControllerTest {
 
   MockMvc mockMvc;
 
@@ -36,48 +34,41 @@ class BeerControllerTest {
   }
 
   @Test
-  void getBeerById() throws Exception {
-    mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID())
+  void getCustomerById() throws Exception {
+    mockMvc.perform(get("/api/v1/customer/" + UUID.randomUUID())
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
   @Test
-  void saveNewBeer() throws Exception {
-    BeerDto beerDto = BeerDto.builder()
-        .beerName("New Beer")
-        .beerStyle(BeerStyleEnum.IPA)
-        .upc("123456789012")
-        .createdDate(OffsetDateTime.now())
-        .lastModifiedDate(OffsetDateTime.now())
+  void saveNewCustomer() throws Exception {
+    CustomerDto customerDto = CustomerDto.builder()
+        .customerName("Wilma Flintstone")
         .build();
-    String beerDtoJson = objectMapper.writeValueAsString(beerDto);
+    String customerDtoJson = objectMapper.writeValueAsString(customerDto);
 
-    mockMvc.perform(post("/api/1/beer")
+    mockMvc.perform(post("/api/1/customer")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(beerDtoJson))
+            .content(customerDtoJson))
         .andExpect(status().isCreated());
   }
 
   @Test
-  void updateBeerById() throws Exception {
-    BeerDto beerDto = BeerDto.builder()
-        .beerName("Updated Beer")
-        .beerStyle(BeerStyleEnum.PALE_ALE)
-        .upc("123456789012")
-        .lastModifiedDate(OffsetDateTime.now())
+  void updateCustomerById() throws Exception {
+    CustomerDto customerDto = CustomerDto.builder()
+        .customerName("Updated Customer")
         .build();
-    String beerDtoJson = objectMapper.writeValueAsString(beerDto);
+    String customerDtoJson = objectMapper.writeValueAsString(customerDto);
 
-    mockMvc.perform(put("/api/1/beer/" + UUID.randomUUID())
+    mockMvc.perform(put("/api/1/customer/" + UUID.randomUUID())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(beerDtoJson))
+            .content(customerDtoJson))
         .andExpect(status().isNoContent());
   }
 
   @Test
-  void deleteBeerById() throws Exception {
-    mockMvc.perform(delete("/api/v1/beer/" + UUID.randomUUID())
+  void deleteCustomerById() throws Exception {
+    mockMvc.perform(delete("/api/v1/customer/" + UUID.randomUUID())
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isNoContent());
   }
