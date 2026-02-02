@@ -37,10 +37,20 @@ import org.springframework.web.client.RestTemplate;
 @Component // if you comment this out Spring will use the JDK HTTP Client
 public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
 
-  private final Environment env;
+  private final Timeout connectTimeout;
+  private final Timeout socketTimeout;
+  private final int maxConnectionsTotal;
+  private final int maxConnectionsPerRoute;
+  private final long connectionRequestTimeout;
+  private final long responseTimeout;
 
   public BlockingRestTemplateCustomizer(Environment env) {
-    this.env = env;
+    connectTimeout = Timeout.ofSeconds(env.getProperty("httpclient.connect.timeout", Long.class, 2L));
+    socketTimeout = Timeout.ofSeconds(env.getProperty("httpclient.socket.timeout", Long.class, 2L));
+    maxConnectionsTotal = env.getProperty("httpclient.max.connection.total", Integer.class, 2);
+    maxConnectionsPerRoute = env.getProperty("httpclient.max.connection.per.route", Integer.class, 2);
+    connectionRequestTimeout = env.getProperty("httpclient.connection.request.timeout", Long.class, 2L);
+    responseTimeout = env.getProperty("httpclient.response.timeout", Long.class, 2L);
   }
 
   /**
@@ -50,19 +60,19 @@ public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
   public ClientHttpRequestFactory clientHttpRequestFactory() {
 
     ConnectionConfig connectionConfig = ConnectionConfig.custom()
-        .setConnectTimeout(Timeout.ofSeconds(env.getProperty("httpclient.connect.timeout", Long.class, 2L)))
-        .setSocketTimeout(Timeout.ofSeconds(env.getProperty("httpclient.socket.timeout", Long.class, 2L)))
+        .setConnectTimeout(connectTimeout)
+        .setSocketTimeout(socketTimeout)
         .build();
 
     PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
-        .setMaxConnTotal(env.getProperty("httpclient.max.connection.total", Integer.class, 2))
-        .setMaxConnPerRoute(env.getProperty("httpclient.max.connection.per.route", Integer.class, 2))
+        .setMaxConnTotal(maxConnectionsTotal)
+        .setMaxConnPerRoute(maxConnectionsPerRoute)
         .build();
 
     RequestConfig requestConfig = RequestConfig.custom()
-        .setConnectionRequestTimeout(env.getProperty("httpclient.connection.request.timeout", Integer.class, 2), TimeUnit.SECONDS)
-        .setResponseTimeout(env.getProperty("httpclient.response.timeout", Integer.class, 2), TimeUnit.SECONDS)
+        .setConnectionRequestTimeout(connectionRequestTimeout, TimeUnit.SECONDS)
+        .setResponseTimeout(responseTimeout, TimeUnit.SECONDS)
         .build();
 
     CloseableHttpClient httpClient = HttpClients
